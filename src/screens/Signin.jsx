@@ -151,6 +151,7 @@ function Signin({ navigation }) {
           // right={0}
           zIndex={9}
           backgroundColor={"#AEC687"}
+          // animation={true}
           // transform={[{ translateX: -320 }, { translateY: 150 }]}
         />
       </>

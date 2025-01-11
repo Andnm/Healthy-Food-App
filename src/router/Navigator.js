@@ -10,6 +10,7 @@ import { ScreensMap } from "./ScreensMap";
 // ↑ Import danh sách các màn hình cần hiển thị trong tab bar
 
 import CustomTabBar from "../components/common/CustomTabBar";
+import { Easing } from "react-native";
 // ↑ Import component TabBar tùy chỉnh thay thế TabBar mặc định
 
 // PHẦN 2: KHỞI TẠO NAVIGATORS
@@ -29,6 +30,7 @@ const TabNavigator = () => {
       screenOptions={({ route }) => ({
         tabBarShowLabel: false, // Ẩn text label trong tab
         headerShown: false, // Ẩn header của screen
+        animation: "shift",
       })}
       backBehavior="history" // Quay lại theo lịch sử
     >
