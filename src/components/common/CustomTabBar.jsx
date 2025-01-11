@@ -1,43 +1,46 @@
-// CustomTabBar.js
+// Import các thư viện cần thiết
 import React, { useMemo, useState } from "react";
 import { View, TouchableOpacity, StyleSheet, Dimensions } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { ScreensMap } from "../../router/ScreensMap";
 
+// Lấy kích thước màn hình
 const WIDTH = Dimensions.get("window").width;
 const HEIGHT = Dimensions.get("window").height;
 
+// Component CustomTabBar - Tạo custom bottom tab navigation
 const CustomTabBar = ({ state, descriptors, navigation }) => {
-  //cập nhật lại object khi chuyển màn hình
+  // Sử dụng useMemo để tối ưu việc lấy thông tin route hiện tại
   const routeItem = useMemo(() => {
     return ScreensMap[state.index];
   }, [state.index]);
 
-  // ẩn tabbar nếu có hiddenBottomTab
+  // Kiểm tra nếu screen hiện tại cần ẩn tabbar
   if (routeItem.hiddenBottomTab) return;
 
   return (
+    // Container chính của TabBar
     <View
       style={{
-        position: "absolute",
-        bottom: 0,
-        width: "100%",
-        height: HEIGHT * 0.08,
-        // backgroundColor: "white",
+        position: "absolute", // Định vị tuyệt đối
+        bottom: 0, // Đặt ở bottom màn hình
+        width: "100%", // Chiều rộng 100%
+        height: HEIGHT * 0.08, // Chiều cao 8% màn hình
       }}
     >
-      {/* Gradient Background */}
+      {/* Nền gradient của TabBar */}
       <LinearGradient
         colors={["#2CAD5E", "#2CAD5E"]}
         style={{
           position: "absolute",
           width: "100%",
           height: "100%",
-          // borderRadius: 50,
         }}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
       />
+
+      {/* Container các tab items */}
       <View
         style={{
           flexDirection: "row",
@@ -46,9 +49,12 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
           alignItems: "center",
         }}
       >
-        {/* Render Tab Bar Icons */}
+        {/* Map qua các routes để render từng tab */}
         {state.routes.map((route, index) => {
+          // Lấy options của route hiện tại
           const { options } = descriptors[route.key];
+
+          // Xác định label cho tab
           const label =
             options.tabBarLabel !== undefined
               ? options.tabBarLabel
@@ -56,8 +62,10 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
               ? options.title
               : route.name;
 
+          // Kiểm tra tab có được focus không
           const isFocused = state.index === index;
 
+          // Xử lý khi nhấn tab
           const onPress = () => {
             const event = navigation.emit({
               type: "tabPress",
@@ -69,6 +77,7 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
             }
           };
 
+          // Xử lý khi nhấn giữ tab
           const onLongPress = () => {
             navigation.emit({
               type: "tabLongPress",
@@ -76,7 +85,7 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
             });
           };
 
-          // Skip rendering if tabBarButton is hidden
+          // Bỏ qua render nếu tab được cấu hình ẩn
           if (
             options.tabBarButton &&
             typeof options.tabBarButton === "function"
@@ -84,6 +93,7 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
             return null;
           }
 
+          // Render từng tab item
           return (
             <TouchableOpacity
               key={index}
@@ -95,16 +105,14 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
               onLongPress={onLongPress}
               style={{ flex: 1, alignItems: "center", ...options.iconStyles }}
             >
+              {/* Render icon của tab */}
               {options.tabBarIcon
                 ? options.tabBarIcon({
                     focused: isFocused,
+                    // Xác định màu icon dựa trên trạng thái focus
                     color: isFocused
-                      ? options?.activeColor
-                        ? options?.activeColor
-                        : "#75E00A"
-                      : options?.inactiveColor
-                      ? options?.inactiveColor
-                      : "#ffffff",
+                      ? options?.activeColor || "#75E00A"
+                      : options?.inactiveColor || "#ffffff",
                     size: 32,
                   })
                 : null}

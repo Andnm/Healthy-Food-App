@@ -1,5 +1,5 @@
+// === PHẦN 1: IMPORTS ===
 import React from "react";
-import SafeAreaWrapper from "../components/layout/SafeAreaWrapper";
 import {
   Text,
   View,
@@ -8,19 +8,32 @@ import {
   Platform,
   Dimensions,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import backgroundImage from "../assets/image/welcome_bg.png";
-import RippleButton from "../components/common/RippleButton";
+// Import các component cơ bản từ React Native
+// Platform: API để check nền tảng (iOS/Android)
+// Dimensions: API lấy kích thước màn hình
 
+import { LinearGradient } from "expo-linear-gradient";
+// Import LinearGradient từ Expo để tạo gradient background
+
+// Import các components tùy chỉnh và assets
+import SafeAreaWrapper from "../components/layout/SafeAreaWrapper";
+import RippleButton from "../components/common/RippleButton";
+import SplitLine from "../components/common/SplitLine";
+
+// Import assets hình ảnh
+import backgroundImage from "../assets/image/welcome_bg.png";
 import googleIcon from "../assets/image/google_icon.png";
 import fbIcon from "../assets/image/fb_logo_square.png";
 import appleIcon from "../assets/image/apple_logo.png";
-import SplitLine from "../components/common/SplitLine";
-import { ScreensName } from "../router/ScreensName";
+import { ScreensName } from "../constants/ScreensName";
 
+// === PHẦN 2: KHỞI TẠO BIẾN ===
 const WIDTH = Dimensions.get("window").width;
 const HEIGHT = Dimensions.get("window").height;
+
+// === PHẦN 3: COMPONENT CHÍNH ===
 function Signup({ navigation }) {
+  // Các hàm xử lý sự kiện
   const onPressGoogleButton = () => {
     navigation.navigate(ScreensName.signin);
   };
@@ -37,6 +50,7 @@ function Signup({ navigation }) {
     navigation.navigate(ScreensName.signin);
   };
 
+  // Cấu hình danh sách các nút đăng ký
   const buttonList = [
     {
       text: "Continue with Google",
@@ -55,11 +69,15 @@ function Signup({ navigation }) {
     },
   ];
 
+  // === PHẦN 4: RENDER UI ===
   return (
     <SafeAreaWrapper
       headerStyle={{ theme: "light", backgroundColor: "transparent" }}
     >
+      {/* Background Image */}
       <Image source={backgroundImage} style={styles.backgroundImage} />
+
+      {/* Gradient Overlay */}
       <LinearGradient
         colors={[
           "transparent",
@@ -78,10 +96,10 @@ function Signup({ navigation }) {
           width: "100%",
           height: "100%",
         }}
-        // start={{ x: 1, y: 1 }}
-        // end={{ x: 0, y: 0 }}
       >
+        {/* Content Container */}
         <View style={styles.view}>
+          {/* Sign up with email button */}
           <RippleButton
             buttonStyle={{
               ...styles.socialButtonStyle,
@@ -92,11 +110,15 @@ function Signup({ navigation }) {
             textStyle={{ ...styles.textStyle, color: "#ffffff" }}
             onPress={onPressSignupButton}
           />
+
+          {/* Divider */}
           <SplitLine
             text="or use social sign up"
             textStyle={styles.splitTextStyle}
             lineStyle={styles.splitLineStyle}
           />
+
+          {/* Social Login Buttons */}
           {buttonList.map((item, index) => (
             <RippleButton
               key={index}
@@ -108,6 +130,8 @@ function Signup({ navigation }) {
               backgroundColor={"rgba(0, 0, 0, 0.2)"}
             />
           ))}
+
+          {/* Login Link */}
           <Text style={styles.alreadyText}>
             Already have account?{" "}
             <Text style={{ textDecorationLine: "underline" }}>Log In</Text>
@@ -118,10 +142,11 @@ function Signup({ navigation }) {
   );
 }
 
+// === PHẦN 5: STYLES ===
 const styles = StyleSheet.create({
   backgroundImage: {
     position: "absolute",
-    top: Platform.OS === "ios" ? -15 : -40,
+    top: Platform.OS === "ios" ? -15 : -40, // Điều chỉnh theo platform
     width: "100%",
     height: "60%",
     resizeMode: "cover",
@@ -144,11 +169,9 @@ const styles = StyleSheet.create({
     marginTop: 16,
     borderRadius: 16,
     backgroundColor: "#ffffff",
+    // Shadow styles
     shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 5,
-    },
+    shadowOffset: { width: 0, height: 5 },
     shadowOpacity: 0.05,
     shadowRadius: 4.65,
     elevation: 6,

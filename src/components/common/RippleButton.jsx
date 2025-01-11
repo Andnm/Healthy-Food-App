@@ -1,44 +1,55 @@
+// Import các thư viện cần thiết
 import React from "react";
 import { Pressable, Text, StyleSheet } from "react-native";
 
+// Component RippleButton - Button có hiệu ứng ripple khi nhấn
 const RippleButton = ({
-  onPress,
-  children, // To allow passing any content inside the button
-  buttonStyle,
-  textStyle,
-  backgroundColor,
-  buttonText,
-  leftButtonIcon,
-  rightButtonIcon,
+  onPress, // Function xử lý khi button được nhấn
+  children, // Cho phép truyền vào bất kỳ content nào
+  buttonStyle, // Style tùy chỉnh cho button
+  textStyle, // Style cho text trong button
+  backgroundColor, // Màu nền cho hiệu ứng ripple
+  buttonText, // Text hiển thị trong button
+  leftButtonIcon, // Icon bên trái của button
+  rightButtonIcon, // Icon bên phải của button
 }) => {
   return (
+    // Pressable component có hiệu ứng ripple khi nhấn
     <Pressable
       onPress={onPress}
+      // Cấu hình hiệu ứng ripple cho Android
       android_ripple={{
-        color: backgroundColor || "rgba(256, 256, 256, 0.2)",
-        borderless: false,
-        foreground: true,
+        color: backgroundColor || "rgba(256, 256, 256, 0.2)", // Màu của ripple
+        borderless: false, // Ripple không vượt quá border
+        foreground: true, // Hiệu ứng hiển thị phía trên content
       }}
+      // Kết hợp style mặc định và custom style
       style={{ ...styles.defaultButtonStyle, ...buttonStyle }}
     >
+      {/* Render icon bên trái nếu có */}
       {leftButtonIcon && leftButtonIcon}
+
+      {/* Render children nếu có, nếu không render buttonText */}
       {children
         ? children
         : buttonText && <Text style={[textStyle]}>{buttonText}</Text>}
+
+      {/* Render icon bên phải nếu có */}
       {rightButtonIcon && rightButtonIcon}
     </Pressable>
   );
 };
 
+// Styles mặc định cho button
 const styles = StyleSheet.create({
   defaultButtonStyle: {
-    overflow: "hidden",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    width: "100%", // Ensure button spans its parent container
-    padding: 12, // Add padding to make it touchable
-    borderRadius: 8, // Add border radius for better UI
+    overflow: "hidden", // Ẩn phần ripple effect bị tràn
+    flexDirection: "row", // Sắp xếp các phần tử theo hàng ngang
+    justifyContent: "center", // Căn giữa theo chiều ngang
+    alignItems: "center", // Căn giữa theo chiều dọc
+    width: "100%", // Chiều rộng 100% container cha
+    padding: 12, // Padding để dễ nhấn
+    borderRadius: 8, // Bo tròn góc
   },
 });
 

@@ -1,32 +1,49 @@
-import Ionicons from "../components/common/VectorIcons/Ionicons";
-
+// PHẦN 1: IMPORTS
 import Signin from "../screens/Signin";
 import Signup from "../screens/Signup";
-import { ScreensName } from "./ScreensName";
+// ↑ Import các component màn hình sẽ được sử dụng trong navigation
 
-// Liệt kê các màn hình của pj
+import { ScreensName } from "../constants/ScreensName";
+// ↑ Import enum chứa tên các màn hình
+// Giúp tránh lỗi typo và dễ dàng quản lý tên màn hình
+
+// PHẦN 2: KHAI BÁO CẤU HÌNH SCREENS
 export const ScreensMap = [
   {
+    // Cấu hình cho màn hình Signup
     name: ScreensName.signup,
+    // ↑ Tên màn hình lấy từ enum, ví dụ: "SIGNUP"
+
     component: Signup,
+    // ↑ Component sẽ được render khi navigate tới màn hình này
+
     options: {
-      tabBarButton: () => null, // ẩn màn hình này trên tabbar
+      tabBarButton: () => null,
+      // ↑ Return null để ẩn nút tab của màn hình này trong tabbar
     },
-    hiddenBottomTab: true, // ẩn tabbar ở màn hình này
+
+    hiddenBottomTab: true,
+    // ↑ Flag để ẩn hoàn toàn tabbar khi ở màn hình này
   },
+
   {
-    name: ScreensName.signin, // Tên màn hình (bắt buộc)
-    component: Signin, // component màn hình (bắt buộc)
+    // Cấu hình cho màn hình Signin
+    name: ScreensName.signin,
+    component: Signin,
     options: {
       tabBarButton: () => null,
     },
     hiddenBottomTab: true,
 
+    // Code mẫu về cách cấu hình icon cho tab (đã comment)
     // options: {
-    //   // liệt kê các options của màn hình này
-    //   tabBarIcon: (
-    //     { color, focused } // Màn hình này có dưới tabbar và declare icon của nó
-    //   ) => <Ionicons name="home-outline" size={32} color={color} />,
+    //   tabBarIcon: ({ color, focused }) => (
+    //     <Ionicons
+    //       name="home-outline"    // Tên icon
+    //       size={32}             // Kích thước icon
+    //       color={color}         // Màu sắc (active/inactive)
+    //     />
+    //   ),
     // },
   },
 ];
