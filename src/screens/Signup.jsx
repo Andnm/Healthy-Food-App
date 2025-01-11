@@ -21,10 +21,10 @@ import RippleButton from "../components/common/RippleButton";
 import SplitLine from "../components/common/SplitLine";
 
 // Import assets hình ảnh
-import backgroundImage from "../assets/image/welcome_bg.png";
-import googleIcon from "../assets/image/google_icon.png";
-import fbIcon from "../assets/image/fb_logo_square.png";
-import appleIcon from "../assets/image/apple_logo.png";
+import backgroundImage from "../../assets/image/welcome_bg.png";
+import googleIcon from "../../assets/image/google_icon.png";
+import fbIcon from "../../assets/image/fb_logo_square.png";
+import appleIcon from "../../assets/image/apple_logo.png";
 import { ScreensName } from "../constants/ScreensName";
 
 // === PHẦN 2: KHỞI TẠO BIẾN ===
@@ -54,17 +54,32 @@ function Signup({ navigation }) {
   const buttonList = [
     {
       text: "Continue with Google",
-      icon: <Image source={googleIcon} style={{ width: 20, height: 20 }} />,
+      icon: (
+        <Image
+          source={googleIcon}
+          style={{ width: 20, height: 20, ...styles.iconStyle }}
+        />
+      ),
       onPress: onPressGoogleButton,
     },
     {
       text: "Continue with Facebook",
-      icon: <Image source={fbIcon} style={{ width: 20, height: 20 }} />,
+      icon: (
+        <Image
+          source={fbIcon}
+          style={{ width: 20, height: 20, ...styles.iconStyle }}
+        />
+      ),
       onPress: onPressFacebookButton,
     },
     {
       text: "Continue with Apple",
-      icon: <Image source={appleIcon} style={{ width: 20, height: 20 }} />,
+      icon: (
+        <Image
+          source={appleIcon}
+          style={{ width: 20, height: 20, ...styles.iconStyle }}
+        />
+      ),
       onPress: onPressAppleButton,
     },
   ];
@@ -164,7 +179,7 @@ const styles = StyleSheet.create({
     width: "80%",
     alignItems: "center",
     justifyContent: "flex-start",
-    padding: 12,
+    padding: 18,
     paddingHorizontal: 32,
     marginTop: 16,
     borderRadius: 16,
@@ -177,10 +192,15 @@ const styles = StyleSheet.create({
     elevation: 6,
   },
   textStyle: {
-    fontSize: 24,
+    fontSize: 18,
     fontWeight: "bold",
     color: "#000",
     marginLeft: 10,
+  },
+  iconStyle: {
+    // position: "absolute",
+    // left: "17%",
+    marginLeft: 28,
   },
   splitLineStyle: {
     width: WIDTH * 0.25,

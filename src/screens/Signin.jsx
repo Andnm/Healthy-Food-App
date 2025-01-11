@@ -18,10 +18,10 @@ import { TouchableOpacity } from "react-native"; // Component có thể click
 import RippleButton from "../components/common/RippleButton"; // Button có hiệu ứng gợn sóng
 
 // Import các assets hình ảnh
-import googleIcon from "../assets/image/google_icon.png"; // Logo Google
-import fbIcon from "../assets/image/fb_round.png"; // Logo Facebook
-import appleIcon from "../assets/image/apple_logo.png"; // Logo Apple
-import loginHeaderIcon from "../assets/image/login_bg.png"; // Ảnh header
+import googleIcon from "../../assets/image/google_icon.png"; // Logo Google
+import fbIcon from "../../assets/image/fb_round.png"; // Logo Facebook
+import appleIcon from "../../assets/image/apple_logo.png"; // Logo Apple
+import loginHeaderIcon from "../../assets/image/login_bg.png"; // Ảnh header
 
 // Lấy chiều rộng màn hình
 const WIDTH = Dimensions.get("window").width;
@@ -136,17 +136,17 @@ function Signin({ navigation }) {
           backgroundColor={"#AEC687"}
         />
         <DecorationDot
-          size={250}
-          top={HEIGHT - HEIGHT * 0.35}
+          size={WIDTH * 0.3}
+          top={HEIGHT - WIDTH * 0.3}
           left={WIDTH - WIDTH * 0.55}
           opacity={0.4}
           zIndex={10}
           transform={[{ translateX: 200 }, { translateY: 50 }]}
         />
         <DecorationDot
-          size={250}
-          top={HEIGHT - 180}
-          left={WIDTH - 150}
+          size={WIDTH * 0.3}
+          top={HEIGHT - WIDTH * 0.3}
+          left={WIDTH - WIDTH * 0.2}
           // bottom={0}
           // right={0}
           zIndex={9}
@@ -172,6 +172,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold", // Độ đậm chữ
     textAlign: "center", // Căn giữa text
     marginBottom: 40, // Margin bottom 40px
+    color: "#191C32", // Màu nền
   },
   formContainer: {
     width: WIDTH, // Chiều rộng bằng màn hình
