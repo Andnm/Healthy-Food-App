@@ -26,6 +26,7 @@ import googleIcon from "../../assets/image/google_icon.png";
 import fbIcon from "../../assets/image/fb_logo_square.png";
 import appleIcon from "../../assets/image/apple_logo.png";
 import { ScreensName } from "../constants/ScreensName";
+import useCustomFonts from "../hooks/useCustomFonts";
 
 // === PHẦN 2: KHỞI TẠO BIẾN ===
 const WIDTH = Dimensions.get("window").width;
@@ -33,6 +34,12 @@ const HEIGHT = Dimensions.get("window").height;
 
 // === PHẦN 3: COMPONENT CHÍNH ===
 function Signup({ navigation }) {
+  const fontsLoaded = useCustomFonts();
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   // Các hàm xử lý sự kiện
   const onPressGoogleButton = () => {
     navigation.navigate(ScreensName.signin);
@@ -196,11 +203,14 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#000",
     marginLeft: 10,
+    fontFamily: "monospace",
+    fontFamily: "PlaywriteAUSA",
   },
   iconStyle: {
     // position: "absolute",
     // left: "17%",
     marginLeft: 28,
+    resizeMode: "contain",
   },
   splitLineStyle: {
     width: WIDTH * 0.25,

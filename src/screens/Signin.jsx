@@ -122,31 +122,31 @@ function Signin({ navigation }) {
       {/* Các chấm trang trí ở 4 góc màn hình */}
       <>
         <DecorationDot
-          size={250}
+          size={HEIGHT * 0.25}
           top={-(HEIGHT * 0.2)}
           left={-(WIDTH * 0.2)}
           opacity={0.4}
           zIndex={10}
         />
         <DecorationDot
-          size={250}
+          size={HEIGHT * 0.25}
           top={-(HEIGHT * 0.1)}
           left={-(WIDTH * 0.4)}
           zIndex={9}
           backgroundColor={"#AEC687"}
         />
         <DecorationDot
-          size={WIDTH * 0.3}
-          top={HEIGHT - WIDTH * 0.3}
-          left={WIDTH - WIDTH * 0.55}
+          size={HEIGHT * 0.25}
+          top={HEIGHT - HEIGHT * 0.3}
+          left={WIDTH - WIDTH * 0.6}
           opacity={0.4}
           zIndex={10}
           transform={[{ translateX: 200 }, { translateY: 50 }]}
         />
         <DecorationDot
-          size={WIDTH * 0.3}
-          top={HEIGHT - WIDTH * 0.3}
-          left={WIDTH - WIDTH * 0.2}
+          size={HEIGHT * 0.25}
+          top={HEIGHT - HEIGHT * 0.15}
+          left={WIDTH - WIDTH * 0.4}
           // bottom={0}
           // right={0}
           zIndex={9}
@@ -173,6 +173,7 @@ const styles = StyleSheet.create({
     textAlign: "center", // Căn giữa text
     marginBottom: 40, // Margin bottom 40px
     color: "#191C32", // Màu nền
+    fontFamily: "Aleo",
   },
   formContainer: {
     width: WIDTH, // Chiều rộng bằng màn hình

@@ -25,8 +25,24 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": [
-      "expo-font"
+    "plugins": ["expo-font"],
+    "fonts": [
+      {
+        "asset": "./assets/fonts/Aleo-Regular.ttf",
+        "family": "Aleo"
+      },
+      {
+        "asset": "./assets/fonts/Aleo-Bold.ttf",
+        "family": "Aleo-Bold"
+      },
+      {
+        "asset": "./assets/fonts/Aleo-Thin.ttf",
+        "family": "Aleo-Thin"
+      },
+      {
+        "asset": "./assets/fonts/PlaywriteAUSA-Regular.ttf",
+        "family": "PlaywriteAUSA"
+      }
     ]
   }
 }
