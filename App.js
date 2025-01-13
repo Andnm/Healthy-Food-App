@@ -5,33 +5,20 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Text, View } from "react-native";
 import store from "./src/redux/store";
 import Navigator from "./src/router/Navigator";
-import { useCallback } from "react";
-import * as SplashScreen from "expo-splash-screen";
-import { useFonts } from "expo-font";
-
-// Keep the splash screen visible while we fetch resources
-SplashScreen.preventAutoHideAsync();
+import React, { useCallback } from "react";
 
 export default function App() {
-  const [fontsLoaded] = useFonts({
-    Aleo: require("./assets/fonts/Aleo-Regular.ttf"),
-    "Aleo-Bold": require("./assets/fonts/Aleo-Bold.ttf"),
-    "Aleo-Thin": require("./assets/fonts/Aleo-Thin.ttf"),
-    PlaywriteAUSA: require("./assets/fonts/PlaywriteAUSA-Regular.ttf"),
-  });
-
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
-
-  if (!fontsLoaded) {
-    return null;
-  }
+  // Text.defaultProps.style = { fontFamily: "monospace" };
+  const TextRender = Text.render;
+  Text.render = function (...args) {
+    const origin = TextRender.call(this, ...args);
+    return React.cloneElement(origin, {
+      style: [{ fontFamily: "Aleo" }, origin.props.style],
+    });
+  };
 
   return (
-    <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+    <View style={{ flex: 1 }}>
       <Provider store={store}>
         <NavigationContainer>
           <Navigator />

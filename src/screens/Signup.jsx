@@ -26,7 +26,6 @@ import googleIcon from "../../assets/image/google_icon.png";
 import fbIcon from "../../assets/image/fb_logo_square.png";
 import appleIcon from "../../assets/image/apple_logo.png";
 import { ScreensName } from "../constants/ScreensName";
-import useCustomFonts from "../hooks/useCustomFonts";
 
 // === PHẦN 2: KHỞI TẠO BIẾN ===
 const WIDTH = Dimensions.get("window").width;
@@ -34,12 +33,6 @@ const HEIGHT = Dimensions.get("window").height;
 
 // === PHẦN 3: COMPONENT CHÍNH ===
 function Signup({ navigation }) {
-  const fontsLoaded = useCustomFonts();
-
-  if (!fontsLoaded) {
-    return null;
-  }
-
   // Các hàm xử lý sự kiện
   const onPressGoogleButton = () => {
     navigation.navigate(ScreensName.signin);
@@ -115,8 +108,10 @@ function Signup({ navigation }) {
         ]}
         style={{
           position: "absolute",
-          width: "100%",
-          height: "100%",
+          top: 0,
+          bottom: Platform.OS === "ios" ? -35 : 0,
+          left: 0,
+          right: 0,
         }}
       >
         {/* Content Container */}
@@ -168,7 +163,7 @@ function Signup({ navigation }) {
 const styles = StyleSheet.create({
   backgroundImage: {
     position: "absolute",
-    top: Platform.OS === "ios" ? -15 : -40, // Điều chỉnh theo platform
+    top: -40, // Điều chỉnh theo platform
     width: "100%",
     height: "60%",
     resizeMode: "cover",
@@ -203,8 +198,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#000",
     marginLeft: 10,
-    fontFamily: "monospace",
-    fontFamily: "PlaywriteAUSA",
   },
   iconStyle: {
     // position: "absolute",

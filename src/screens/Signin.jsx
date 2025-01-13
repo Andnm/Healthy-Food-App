@@ -5,7 +5,9 @@ import {
   Text, // Component hiển thị text
   View, // Component container
   Dimensions, // API lấy kích thước màn hình
-  Image, // Component hiển thị hình ảnh
+  Image,
+  Platform,
+  KeyboardAvoidingView, // Component hiển thị hình ảnh
 } from "react-native";
 
 // Import các components tùy chỉnh từ thư mục components
@@ -79,82 +81,86 @@ function Signin({ navigation }) {
   return (
     <SafeAreaWrapper headerStyle={{ backgroundColor: "transparent" }}>
       {/* Phần header với ảnh */}
-      <Image source={loginHeaderIcon} style={styles.backgroundImage} />
-      <Text style={styles.title}>Sign in with email</Text>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
+        <Image source={loginHeaderIcon} style={styles.backgroundImage} />
+        <Text style={styles.title}>Sign in with email</Text>
 
-      {/* Form đăng nhập */}
-      <View style={styles.formContainer}>
-        {/* Input email */}
-        <SigninInputField
-          state={email}
-          setState={setEmail}
-          icon={<Ionicons name="mail-outline" size={24} color="#5FC88F" />}
-          iconBackgroundcolor="#DEF5E9"
-          placeholder="Email"
-          inputType="email-address"
-          keyboardType="email-address"
-        />
-        {/* Input password */}
-        <SigninInputField
-          state={password}
-          setState={setPassword}
-          icon={<MaterialIcons name="lock-open" size={24} color="#9F9DF3" />}
-          iconBackgroundcolor="#EBECFF"
-          placeholder="Password"
-          secureTextEntry
-        />
-        {/* Link quên mật khẩu */}
-        <TouchableOpacity>
-          <Text style={styles.forgotPassword}>Forgot Password?</Text>
-        </TouchableOpacity>
-        {/* Nút đăng nhập */}
-        <RippleButton
-          onPress={handlePress}
-          buttonText="Sign in"
-          buttonStyle={styles.signinButton}
-          textStyle={styles.signinButtonText}
-        />
-      </View>
+        {/* Form đăng nhập */}
+        <View style={styles.formContainer}>
+          {/* Input email */}
+          <SigninInputField
+            state={email}
+            setState={setEmail}
+            icon={<Ionicons name="mail-outline" size={24} color="#5FC88F" />}
+            iconBackgroundcolor="#DEF5E9"
+            placeholder="Email"
+            inputType="email-address"
+            keyboardType="email-address"
+          />
+          {/* Input password */}
+          <SigninInputField
+            state={password}
+            setState={setPassword}
+            icon={<MaterialIcons name="lock-open" size={24} color="#9F9DF3" />}
+            iconBackgroundcolor="#EBECFF"
+            placeholder="Password"
+            secureTextEntry
+          />
+          {/* Link quên mật khẩu */}
+          <TouchableOpacity>
+            <Text style={styles.forgotPassword}>Forgot Password?</Text>
+          </TouchableOpacity>
+          {/* Nút đăng nhập */}
+          <RippleButton
+            onPress={handlePress}
+            buttonText="Sign in"
+            buttonStyle={styles.signinButton}
+            textStyle={styles.signinButtonText}
+          />
+        </View>
 
-      {/* Phần đăng nhập bằng dịch vụ thứ 3 */}
-      <View style={styles.loginMethodContainer}>{renderLoginMethod()}</View>
+        {/* Phần đăng nhập bằng dịch vụ thứ 3 */}
+        <View style={styles.loginMethodContainer}>{renderLoginMethod()}</View>
 
-      {/* Các chấm trang trí ở 4 góc màn hình */}
-      <>
-        <DecorationDot
-          size={HEIGHT * 0.25}
-          top={-(HEIGHT * 0.2)}
-          left={-(WIDTH * 0.2)}
-          opacity={0.4}
-          zIndex={10}
-        />
-        <DecorationDot
-          size={HEIGHT * 0.25}
-          top={-(HEIGHT * 0.1)}
-          left={-(WIDTH * 0.4)}
-          zIndex={9}
-          backgroundColor={"#AEC687"}
-        />
-        <DecorationDot
-          size={HEIGHT * 0.25}
-          top={HEIGHT - HEIGHT * 0.3}
-          left={WIDTH - WIDTH * 0.6}
-          opacity={0.4}
-          zIndex={10}
-          transform={[{ translateX: 200 }, { translateY: 50 }]}
-        />
-        <DecorationDot
-          size={HEIGHT * 0.25}
-          top={HEIGHT - HEIGHT * 0.15}
-          left={WIDTH - WIDTH * 0.4}
-          // bottom={0}
-          // right={0}
-          zIndex={9}
-          backgroundColor={"#AEC687"}
-          // animation={true}
-          // transform={[{ translateX: -320 }, { translateY: 150 }]}
-        />
-      </>
+        {/* Các chấm trang trí ở 4 góc màn hình */}
+        <>
+          <DecorationDot
+            size={HEIGHT * 0.25}
+            top={-(HEIGHT * 0.2)}
+            left={-(WIDTH * 0.2)}
+            opacity={0.4}
+            zIndex={10}
+          />
+          <DecorationDot
+            size={HEIGHT * 0.25}
+            top={-(HEIGHT * 0.1)}
+            left={-(WIDTH * 0.4)}
+            zIndex={9}
+            backgroundColor={"#AEC687"}
+          />
+          <DecorationDot
+            size={HEIGHT * 0.25}
+            top={HEIGHT - HEIGHT * 0.3}
+            left={WIDTH - WIDTH * 0.6}
+            opacity={0.4}
+            zIndex={10}
+            transform={[{ translateX: 200 }, { translateY: 50 }]}
+          />
+          <DecorationDot
+            size={HEIGHT * 0.25}
+            top={HEIGHT - HEIGHT * 0.15}
+            left={WIDTH - WIDTH * 0.4}
+            // bottom={0}
+            // right={0}
+            zIndex={9}
+            backgroundColor={"#AEC687"}
+            // animation={true}
+            // transform={[{ translateX: -320 }, { translateY: 150 }]}
+          />
+        </>
+      </KeyboardAvoidingView>
     </SafeAreaWrapper>
   );
 }
@@ -166,12 +172,13 @@ const styles = StyleSheet.create({
     height: "35%", // Chiếm 35% chiều cao màn hình
     resizeMode: "cover", // Chế độ resize ảnh
     marginHorizontal: "20%", // Căn lề 2 bên 20%
+    // marginBottom: -HEIGHT * 0.005, // Margin bottom 30px
   },
   title: {
     fontSize: 30, // Cỡ chữ
     fontWeight: "bold", // Độ đậm chữ
     textAlign: "center", // Căn giữa text
-    marginBottom: 40, // Margin bottom 40px
+    marginBottom: 20, // Margin bottom 40px
     color: "#191C32", // Màu nền
     fontFamily: "Aleo",
   },
