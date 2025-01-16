@@ -176,11 +176,10 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30, // Cỡ chữ
-    fontWeight: "bold", // Độ đậm chữ
     textAlign: "center", // Căn giữa text
     marginBottom: 20, // Margin bottom 40px
     color: "#191C32", // Màu nền
-    fontFamily: "Aleo",
+    fontFamily: "Aleo_700Bold",
   },
   formContainer: {
     width: WIDTH, // Chiều rộng bằng màn hình
@@ -205,7 +204,8 @@ const styles = StyleSheet.create({
     textAlign: "center", // Căn giữa text
     color: "#fff", // Màu chữ trắng
     fontSize: 24, // Cỡ chữ
-    fontWeight: "bold", // Độ đậm chữ
+    // fontWeight: "bold", // Độ đậm chữ
+    fontFamily: "Aleo_700Bold",
   },
   loginMethodContainer: {
     flexDirection: "row", // Sắp xếp theo hàng ngang

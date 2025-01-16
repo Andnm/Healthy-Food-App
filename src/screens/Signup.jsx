@@ -195,7 +195,8 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     fontSize: 18,
-    fontWeight: "bold",
+    // fontWeight: "bold",
+    fontFamily: "Aleo_700Bold",
     color: "#000",
     marginLeft: 10,
   },
@@ -214,6 +215,7 @@ const styles = StyleSheet.create({
     marginVertical: 24,
     fontSize: 16,
     color: "#FFFFFF",
+    fontFamily: "Aleo_400Regular",
   },
 });
 

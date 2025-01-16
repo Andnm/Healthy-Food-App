@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 8, // Tạo khoảng cách trái phải cho text
     fontSize: 16, // Kích thước chữ
     color: "#D6D6D6", // Màu mặc định của text (màu xám nhạt)
+    fontFamily: "Aleo_400Regular",
   },
 });
 

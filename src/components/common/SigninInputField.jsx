@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
     flex: 1, // Chiếm hết không gian còn lại
     fontSize: 20, // Cỡ chữ
     color: "#000", // Màu chữ
+    fontFamily: "Aleo_400Regular",
   },
 });
 
