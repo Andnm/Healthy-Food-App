@@ -177,9 +177,9 @@ function Signup({ navigation }) {
 const styles = StyleSheet.create({
   backgroundImage: {
     position: "absolute",
-    top: -40, // Điều chỉnh theo platform
+    top: -HEIGHT * 0.08, // Điều chỉnh theo platform
     width: "100%",
-    height: "60%",
+    height: "65%",
     resizeMode: "cover",
     borderRadius: 20,
     transform: [{ translateY: Platform.OS === "ios" ? -15 : -10 }],

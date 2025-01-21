@@ -1,6 +1,16 @@
 // Import các thư viện cần thiết
 import React, { useState } from "react";
-import { Pressable, Text, StyleSheet, Animated, Platform } from "react-native";
+import {
+  Pressable,
+  Text,
+  StyleSheet,
+  Animated,
+  Platform,
+  Dimensions,
+} from "react-native";
+
+const WIDTH = Dimensions.get("window").width;
+const HEIGHT = Dimensions.get("window").height;
 
 // Định nghĩa component RippleButton với các props
 const RippleButton = ({
@@ -91,18 +101,19 @@ const RippleButton = ({
               backgroundColor,
               opacity: rippleOpacity, // Áp dụng animation opacity
               transform: [{ scale: rippleScale }], // Áp dụng animation scale
-              left: touchCoords.x - 100, // Căn chỉnh vị trí ripple
-              top: touchCoords.y - 100,
+              left: touchCoords.x - WIDTH * 0.09, // Căn chỉnh vị trí ripple
+              top: touchCoords.y - HEIGHT * 0.09,
             },
           ]}
         />
       )}
       {/* Nội dung button */}
-      {leftButtonIcon} {/* Render icon trái nếu có */}
-      {children ||
-        (buttonText && <Text style={textStyle}>{buttonText}</Text>)}{" "}
+      {leftButtonIcon && leftButtonIcon}
+      {/* Render icon trái nếu có */}
+      {children || (buttonText && <Text style={textStyle}>{buttonText}</Text>)}
       {/* Render children hoặc text */}
-      {rightButtonIcon} {/* Render icon phải nếu có */}
+      {rightButtonIcon && rightButtonIcon}
+      {/* Render icon phải nếu có */}
     </Pressable>
   );
 };

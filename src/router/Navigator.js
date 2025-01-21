@@ -31,6 +31,8 @@ const TabNavigator = () => {
         tabBarShowLabel: false, // Ẩn text label trong tab
         headerShown: false, // Ẩn header của screen
         animation: "shift",
+        gestureEnabled: true, // Enable thao tác vuốt
+        gestureDirection: "horizontal", // Hướng vuốt ngang
       })}
       backBehavior="history" // Quay lại theo lịch sử
     >
