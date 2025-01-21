@@ -64,7 +64,7 @@ function Signin({ navigation }) {
       <RippleButton
         key={index}
         buttonStyle={styles.loginMethod}
-        backgroundColor={"rgab(0, 0, 0, 0.2)"}
+        backgroundColor={"rgab(0, 0, 0, 0.5)"}
       >
         <Image
           source={item.icon}

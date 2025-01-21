@@ -26,6 +26,7 @@ import googleIcon from "../../assets/image/google_icon.png";
 import fbIcon from "../../assets/image/fb_logo_square.png";
 import appleIcon from "../../assets/image/apple_logo.png";
 import { ScreensName } from "../constants/ScreensName";
+import { TouchableOpacity } from "react-native";
 
 // === PHẦN 2: KHỞI TẠO BIẾN ===
 const WIDTH = Dimensions.get("window").width;
@@ -35,19 +36,19 @@ const HEIGHT = Dimensions.get("window").height;
 function Signup({ navigation }) {
   // Các hàm xử lý sự kiện
   const onPressGoogleButton = () => {
-    navigation.navigate(ScreensName.signin);
+    // navigation.navigate(ScreensName.signin);
   };
 
   const onPressFacebookButton = () => {
-    navigation.navigate(ScreensName.signin);
+    // navigation.navigate(ScreensName.signin);
   };
 
   const onPressAppleButton = () => {
-    navigation.navigate(ScreensName.signin);
+    // navigation.navigate(ScreensName.signin);
   };
 
   const onPressSignupButton = () => {
-    navigation.navigate(ScreensName.signin);
+    // navigation.navigate(ScreensName.signin);
   };
 
   // Cấu hình danh sách các nút đăng ký
@@ -151,7 +152,20 @@ function Signup({ navigation }) {
           {/* Login Link */}
           <Text style={styles.alreadyText}>
             Already have account?{" "}
-            <Text style={{ textDecorationLine: "underline" }}>Log In</Text>
+            <TouchableOpacity
+              onPress={() => navigation.navigate(ScreensName.signin)}
+            >
+              <Text
+                style={{
+                  textDecorationLine: "underline",
+                  fontSize: 16,
+                  color: "white",
+                  transform: [{ translateY: 2 }],
+                }}
+              >
+                Log In
+              </Text>
+            </TouchableOpacity>
           </Text>
         </View>
       </LinearGradient>
