@@ -7,6 +7,7 @@ import {
   Animated,
   Platform,
   Dimensions,
+  View,
 } from "react-native";
 
 const WIDTH = Dimensions.get("window").width;
@@ -22,6 +23,7 @@ const RippleButton = ({
   buttonText, // Text hiển thị trong button
   leftButtonIcon, // Icon bên trái của button
   rightButtonIcon, // Icon bên phải của button
+  contentContainerStyle,
 }) => {
   // Khởi tạo các state cho animation
   const [rippleScale] = useState(new Animated.Value(0)); // Scale của hiệu ứng ripple, bắt đầu từ 0
@@ -107,13 +109,12 @@ const RippleButton = ({
           ]}
         />
       )}
-      {/* Nội dung button */}
-      {leftButtonIcon && leftButtonIcon}
-      {/* Render icon trái nếu có */}
-      {children || (buttonText && <Text style={textStyle}>{buttonText}</Text>)}
-      {/* Render children hoặc text */}
-      {rightButtonIcon && rightButtonIcon}
-      {/* Render icon phải nếu có */}
+      <View style={[styles.contentContainer, contentContainerStyle]}>
+        {leftButtonIcon}
+        {children ||
+          (buttonText && <Text style={textStyle}>{buttonText}</Text>)}
+        {rightButtonIcon}
+      </View>
     </Pressable>
   );
 };
@@ -129,6 +130,12 @@ const styles = StyleSheet.create({
     padding: 12, // Padding để dễ nhấn
     borderRadius: 8, // Bo tròn góc
     position: "relative", // Để có thể định vị các phần tử con tuyệt đối
+  },
+  contentContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center", // Căn giữa theo chiều ngang
+    width: "100%",
   },
   rippleView: {
     position: "absolute", // Định vị tuyệt đối so với button

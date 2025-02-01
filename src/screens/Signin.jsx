@@ -69,8 +69,10 @@ function Signin({ navigation }) {
         <Image
           source={item.icon}
           style={{
-            width: WIDTH * 0.08,
-            height: WIDTH * 0.08,
+            // width: WIDTH * 0.08,
+            // height: WIDTH * 0.08,
+            width: 40,
+            height: 40,
             resizeMode: "contain",
           }}
         />
@@ -83,6 +85,7 @@ function Signin({ navigation }) {
       {/* Phần header với ảnh */}
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.container}
       >
         <Image source={loginHeaderIcon} style={styles.backgroundImage} />
         <Text style={styles.title}>Sign in with email</Text>
@@ -93,7 +96,7 @@ function Signin({ navigation }) {
           <SigninInputField
             state={email}
             setState={setEmail}
-            icon={<Ionicons name="mail-outline" size={24} color="#5FC88F" />}
+            icon={<Ionicons name="mail-outline" size={20} color="#5FC88F" />}
             iconBackgroundcolor="#DEF5E9"
             placeholder="Email"
             inputType="email-address"
@@ -103,7 +106,7 @@ function Signin({ navigation }) {
           <SigninInputField
             state={password}
             setState={setPassword}
-            icon={<MaterialIcons name="lock-open" size={24} color="#9F9DF3" />}
+            icon={<MaterialIcons name="lock-open" size={20} color="#9F9DF3" />}
             iconBackgroundcolor="#EBECFF"
             placeholder="Password"
             secureTextEntry
@@ -167,11 +170,15 @@ function Signin({ navigation }) {
 
 // Định nghĩa styles
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+  },
   backgroundImage: {
-    width: "60%", // Chiếm 60% chiều rộng màn hình
-    height: "35%", // Chiếm 35% chiều cao màn hình
-    resizeMode: "cover", // Chế độ resize ảnh
-    marginHorizontal: "20%", // Căn lề 2 bên 20%
+    // width: "60%", // Chiếm 60% chiều rộng màn hình
+    height: "40%", // Chiếm 35% chiều cao màn hình
+    resizeMode: "contain", // Chế độ resize ảnh
+    // marginHorizontal: "20%", // Căn lề 2 bên 20%
     // marginBottom: -HEIGHT * 0.005, // Margin bottom 30px
   },
   title: {
@@ -203,7 +210,7 @@ const styles = StyleSheet.create({
   signinButtonText: {
     textAlign: "center", // Căn giữa text
     color: "#fff", // Màu chữ trắng
-    fontSize: 24, // Cỡ chữ
+    fontSize: 18, // Cỡ chữ
     // fontWeight: "bold", // Độ đậm chữ
     fontFamily: "Aleo_700Bold",
   },

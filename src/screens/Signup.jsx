@@ -1,5 +1,5 @@
 // === PHẦN 1: IMPORTS ===
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Text,
   View,
@@ -7,6 +7,7 @@ import {
   Image,
   Platform,
   Dimensions,
+  PixelRatio,
 } from "react-native";
 // Import các component cơ bản từ React Native
 // Platform: API để check nền tảng (iOS/Android)
@@ -34,6 +35,8 @@ const HEIGHT = Dimensions.get("window").height;
 
 // === PHẦN 3: COMPONENT CHÍNH ===
 function Signup({ navigation }) {
+  const [buttonWidth, setButtonWidth] = useState(WIDTH);
+
   // Các hàm xử lý sự kiện
   const onPressGoogleButton = () => {
     // navigation.navigate(ScreensName.signin);
@@ -50,6 +53,36 @@ function Signup({ navigation }) {
   const onPressSignupButton = () => {
     // navigation.navigate(ScreensName.signin);
   };
+
+  const getTextWidth = (text, fontSize, fontFamily) => {
+    const scaledFontSize = fontSize * PixelRatio.getFontScale();
+    // Add extra padding for the icon and safety margin
+    const extraPadding = 0; // Adjust this value based on your needs
+    return text.length * scaledFontSize * 0.6 + extraPadding; // 0.6 is an approximate character width ratio
+  };
+
+  const calculateMaxButtonWidth = () => {
+    const buttonTexts = [
+      "Sign up with email",
+      "Continue with Google",
+      "Continue with Facebook",
+      "Continue with Apple",
+    ];
+
+    const textWidths = buttonTexts.map((text) =>
+      getTextWidth(text, 18, "Aleo_700Bold")
+    );
+
+    // Get the maximum width, but ensure it's not larger than 80% of screen width
+    const maxWidth = Math.min(Math.max(...textWidths), WIDTH * 0.8);
+
+    setButtonWidth(maxWidth);
+  };
+
+  // Calculate max width on component mount
+  useEffect(() => {
+    calculateMaxButtonWidth();
+  }, []);
 
   // Cấu hình danh sách các nút đăng ký
   const buttonList = [
@@ -81,6 +114,7 @@ function Signup({ navigation }) {
           style={{ width: 20, height: 20, ...styles.iconStyle }}
         />
       ),
+      textStyle: { transform: [{ translateY: 3 }] },
       onPress: onPressAppleButton,
     },
   ];
@@ -140,10 +174,17 @@ function Signup({ navigation }) {
           {buttonList.map((item, index) => (
             <RippleButton
               key={index}
-              buttonStyle={styles.socialButtonStyle}
+              buttonStyle={{
+                ...styles.socialButtonStyle,
+                ...item.buttonStyle,
+              }}
               leftButtonIcon={item.icon}
               buttonText={item.text}
-              textStyle={styles.textStyle}
+              textStyle={{ ...styles.textStyle, ...item.textStyle }}
+              contentContainerStyle={{
+                ...styles.buttonContainerStyle,
+                width: buttonWidth,
+              }}
               onPress={item.onPress}
               backgroundColor={"rgba(0, 0, 0, 0.2)"}
             />
@@ -152,20 +193,20 @@ function Signup({ navigation }) {
           {/* Login Link */}
           <Text style={styles.alreadyText}>
             Already have account?{" "}
-            <TouchableOpacity
+            {/* <TouchableOpacity
+              onPress={() => navigation.navigate(ScreensName.signin)}
+            > */}
+            <Text
+              style={{
+                textDecorationLine: "underline",
+                fontSize: 16,
+                color: "white",
+              }}
               onPress={() => navigation.navigate(ScreensName.signin)}
             >
-              <Text
-                style={{
-                  textDecorationLine: "underline",
-                  fontSize: 16,
-                  color: "white",
-                  transform: [{ translateY: 2 }],
-                }}
-              >
-                Log In
-              </Text>
-            </TouchableOpacity>
+              Log In
+            </Text>
+            {/* </TouchableOpacity> */}
           </Text>
         </View>
       </LinearGradient>
@@ -193,8 +234,7 @@ const styles = StyleSheet.create({
   socialButtonStyle: {
     flexDirection: "row",
     width: "80%",
-    alignItems: "center",
-    justifyContent: "flex-start",
+    justifyContent: "center",
     padding: 18,
     paddingHorizontal: 32,
     marginTop: 16,
@@ -209,16 +249,18 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     fontSize: 18,
-    // fontWeight: "bold",
     fontFamily: "Aleo_700Bold",
     color: "#000",
     marginLeft: 10,
   },
   iconStyle: {
-    // position: "absolute",
-    // left: "17%",
-    marginLeft: 28,
+    height: 24,
+    width: 24,
     resizeMode: "contain",
+  },
+  buttonContainerStyle: {
+    width: "80%",
+    justifyContent: "flex-start",
   },
   splitLineStyle: {
     width: WIDTH * 0.25,

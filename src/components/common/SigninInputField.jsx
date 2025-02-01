@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row", // Sắp xếp theo hàng ngang
     alignItems: "center", // Căn giữa các item
-    padding: 12, // Padding cho container
+    padding: 10, // Padding cho container
     borderRadius: 24, // Bo tròn góc
     backgroundColor: "#ffffff", // Màu nền trắng
     // Shadow cho iOS
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   },
   inputField: {
     flex: 1, // Chiếm hết không gian còn lại
-    fontSize: 20, // Cỡ chữ
+    fontSize: 18, // Cỡ chữ
     color: "#000", // Màu chữ
     fontFamily: "Aleo_400Regular",
   },
