@@ -71,8 +71,8 @@ function Signin({ navigation }) {
           style={{
             // width: WIDTH * 0.08,
             // height: WIDTH * 0.08,
-            width: 40,
-            height: 40,
+            width: 32,
+            height: 32,
             resizeMode: "contain",
           }}
         />
